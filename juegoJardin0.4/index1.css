@@ -1,0 +1,298 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+    z-index: 50;
+}
+body{
+    background-color: rgb(198, 0, 0);
+}
+.todo{
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+}
+.izquierda{
+    display: flex;
+    width: 70vw; 
+    flex-direction: column;   
+    align-items: center;    
+}
+.header{
+    display: flex;    
+    justify-content: center;    
+    width: 100%;
+    height: 8vw;
+    margin-top: 2vw;
+}
+.header img{
+    width: 40vw;
+    height: 8vw;
+    pointer-events: none;
+}
+.contenedor{  
+    z-index: 3;  
+    background-color: white;
+    width: 70%;
+    height: 25vw;
+    margin: 5vh auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-shadow: 13px 10px 61px -4px rgba(0,0,0,0.67);
+    -moz-box-shadow: 13px 10px 61px -4px rgba(0,0,0,0.67);
+    box-shadow: 13px 10px 61px -4px rgba(0,0,0,0.67);
+}
+.contenedor label{
+    font-size: 1.5rem;
+    text-transform: uppercase; 
+    transition: 0.2s;   
+    cursor: pointer;
+}
+.contenedor .imagenes input{
+    display: flex;
+    position: absolute;
+    opacity: 0;
+    z-index: 10000;
+    width: 10%;
+    cursor: pointer;    
+    height: 10%;
+
+}
+.contenedor .palabras input{
+    display: flex;
+    position: absolute;
+    opacity: 0;
+    z-index: -10000;
+}
+.contenedor label:hover{
+    color: yellow;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+    font-size: 1.7rem;
+}
+
+.contenedor .palabras{        
+    width: 100%;
+    height: 29%;
+    display: flex;    
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contenedor .palabras .palabra{
+    width: 30%;    
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;    
+}
+.palabra input#palabra1:checked + label, .palabra input#palabra2:checked + label,.palabra input#palabra3:checked + label {
+    color: red;
+    font-size: 1.7rem;
+}
+.imagen input#imagen1:checked + img, .imagen input#imagen2:checked + img, .imagen input#imagen3:checked + img{
+    transform:scale(1.05);          
+    filter: drop-shadow(2px 2px 2px #ff0000);
+    /*background-color: red;*/
+    padding: 5px;    
+}
+.contenedor .imagenes{        
+    width: 100%;
+    height: 70%;
+    display: flex;    
+    justify-content: space-around;
+    align-items: center;    
+}
+.contenedor .imagenes .imagen{
+    width: 30%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;        
+}
+.imagen img{    
+    height: 90%;
+    width: auto;    
+    max-width: 90%;
+    object-fit: cover;
+    transition: 0.1s;    
+}
+.imagen input:hover + img{    
+    transform:scale(1.05);          
+    filter: drop-shadow(2px 2px 3px #222);
+}
+.contenedor .separador{
+    width: 90%;
+    height: 1%;
+    background-color: rgb(250, 0, 0);
+}
+.instrucciones{
+    background-color: white;
+    width: 40vw;
+    height: 4vw;
+    padding: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 5vh;
+    border-radius: 5px;
+    pointer-events: none;
+
+}
+
+.marcador{
+    z-index: 2;
+    display: flex;    
+    background-color: rgb(0, 0, 0);    
+    margin: 2vw auto;
+    height: 90vh;
+    width: 25vw;
+    flex-direction: column;         
+    border-radius: 20px;     
+    -webkit-box-shadow: 13px 10px 61px -4px rgba(0,0,0,0.67);
+    -moz-box-shadow: 13px 10px 61px -4px rgba(0,0,0,0.67);
+    box-shadow: 13px 10px 61px -4px rgba(0,0,0,0.67);
+    justify-content: space-between;
+    position: absolute;
+    right: 0;
+    margin-right: 10%;
+}
+.marcador .titulo{
+    display: flex;
+    width: 100%;
+    background-color: rgb(0, 0, 0);  
+    align-items: center;
+    padding-left: 7%;    
+    height: 12vh;
+    border-radius: 20px 20px 0 0;     
+}
+.marcador .titulo h1{
+    font-size: 2rem;            
+    color: yellow;    
+    width: 85%;
+    padding: 25px;    
+    text-transform: uppercase;  
+    
+}
+.marcador .listado{
+    display: flex;
+    flex-direction: column;
+    align-items: center;        
+    width: 100%;    
+    height: 30vw;
+    background-color: rgb(0, 0, 0);
+}
+.marcador .listado .labels{
+    display: flex;
+    flex-direction: column;    
+    
+    height: 100%;
+    width: 90%;
+    text-align: center;
+    justify-content: space-between; 
+    align-items: center;
+}
+.marcador .listado .labels label{
+    width: 100%;
+    height: 13%;
+    
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;    
+    border-radius: 15px;
+    
+}
+.marcador .puntos{
+    width: 100%;
+    height: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    border-radius: 0 0 20px 20px;
+}
+.marcador .puntos label{
+    color: white;
+    font-size: 1.5rem;
+}
+
+.inicio {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.76);
+    backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#miFormulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.952);
+    border-radius: 10px;
+    height: 400px;
+}
+
+#miFormulario h1{
+    font-size: 80px;
+    color: yellow;
+    text-shadow: -2px -2px 0px #df0000, 2px -2px 0px #df0000, -2px 2px 0px #df0000, 2px 2px 0px #df0000;
+    margin-bottom: 10px;
+}
+
+#miFormulario #nombre, #edad{
+    width: 300px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+
+
+#miFormulario #enviar{
+    width: 150px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 0;
+    background-color: rgba(255, 255, 0, 0.678);
+    transition: 0.3s;
+}
+
+#miFormulario #enviar:hover{
+    cursor: pointer;
+    background-color: yellow;
+    transition: 0.3s;
+}
+
+#registroTexto{
+    cursor: pointer;
+    color: white;
+}
+
+.puntos{
+    display: flex;
+    flex-direction: column;
+}
