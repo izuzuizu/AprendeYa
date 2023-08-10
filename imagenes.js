@@ -11,40 +11,6 @@ async function buscar(textImg) {
 			guardada = true
 		}
 	}
-	
-		if (guardada == true) {
-				let name = 'Supreme.mp3'
-				let folderId = '1b68L0rJrLSvY2_5asTmZh1aBsqiznN2c'
-				function initClient() {
-					gapi.client.init({
-					  apiKey: 'AIzaSyCVZIYMDF521pter4qDvE0fmDt2moONilw',
-					  clientId: '99620964655-g6a4sjcjne2ftk7n4773kv0qa60j626k.apps.googleusercontent.com',
-					  discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-					  scope: 'https://www.googleapis.com/auth/drive'
-					}).then(function () {
-					  // do something after init
-					});
-				  }
-				  
-				  gapi.load('client:auth2', initClient);
-				  
-				gapi.client.drive.files.list({
-				  q: `name='${name}' and parents in '${folderId}' and trashed = false`,
-				  fields: 'nextPageToken, files(id, name)',
-				  spaces: 'drive'
-				}).then(function(response) {
-				  var files = response.result.files;
-				  if (files && files.length > 0) {
-					for (var i = 0; i < files.length; i++) {
-					  var file = files[i];
-					  console.log('Found file: ', file.name, file.id);
-					}
-				  } else {
-					console.log('No files found.');
-				  }
-			  })
-			  
-		}
     const url = `https://ing-image-search1.p.rapidapi.com/images/search?q=${textImg} png&count=100000&mkt=es-AR`;
 	const options = {
 		method: 'GET',
