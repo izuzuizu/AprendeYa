@@ -17,7 +17,6 @@ if ($resultado->num_rows > 0) {
     // Si no se encontró el usuario, mostrar un mensaje o tomar alguna acción
     echo "Usuario no encontrado";
 }
-
 if (isset($_POST['puntos'])) {
     $puntos = $_POST['puntos'];
     $sql = "UPDATE usuario SET puntos='$puntos' WHERE nickname='$usuario'";

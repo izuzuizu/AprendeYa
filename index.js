@@ -10,17 +10,16 @@ puntos = puntos.innerHTML
 puntos = parseInt(puntos)
 console.log("puntos: "+puntos)
 let palabras = [
-    // 'letra a', 'letra b', 'letra c', 'letra d', 'letra e', 'letra f', 'letra g', 'letra h', 'letra i', 'letra j',
-    // 'letra k', 'letra l', 'letra m', 'letra n', 'letra ñ', 'letra o', 'letra p', 'letra q', 'letra r', 'letra s',
-    // 'letra t', 'letra u', 'letra v', 'letra w', 'letra x', 'letra y', 'letra z', 'numero 0', 'numero 1', 'numero 2',
-    // 'numero 3', 'numero 4', 'numero 5', 'numero 6', 'numero 7', 'numero 8', 'numero 9', 'jirafa', 'perro', 'gato',
-    // 'elefante', 'león', 'tigre', 'oso', 'cebra', 'canguro', 'hipopótamo', 'rinoceronte', 'mono', 'serpiente',
-    // 'cocodrilo', 'ballena', 'delfín', 'tiburón', 'pingüino', 'águila', 'búho', 'gallina', 'caballo', 'vaca',
-    // 'cerdo', 'oveja', 'cabra', 'conejo', 'ratón', 'murciélago', 'zanahoria', 'brócoli', 'espinaca', 'calabacín',
-    // 'tomate', 'pepino', 'pimiento', 'maíz', 'guisantes', 'calabaza', 'manzana', 'plátano', 'fresa', 'naranja',
-    // 'uva', 'sandía', 'piña', 'melón', 'pera', 'mango', 'mamá', 'papá', 'abuela', 'abuelo', 'casa', 'coche',
-    // 'sol', 'luna', 'árbol', 'flor', 'pelota', 'juguete', 'libro', 'agua', 'leche', 'pan', 'mano', 'pie'
-    'numero 1', 'letra ñ', 'zanahoria', 'papá', 'maíz', 'juguete', 'rinoceronte', 'letra z'
+    'letra a', 'letra b', 'letra c', 'letra d', 'letra e', 'letra f', 'letra g', 'letra h', 'letra i', 'letra j',
+    'letra k', 'letra l', 'letra m', 'letra n', 'letra ñ', 'letra o', 'letra p', 'letra q', 'letra r', 'letra s',
+    'letra t', 'letra u', 'letra v', 'letra w', 'letra x', 'letra y', 'letra z', 'numero 0', 'numero 1', 'numero 2',
+    'numero 3', 'numero 4', 'numero 5', 'numero 6', 'numero 7', 'numero 8', 'numero 9', 'jirafa', 'perro', 'gato',
+    'elefante', 'león', 'tigre', 'oso', 'cebra', 'canguro', 'hipopótamo', 'rinoceronte', 'mono', 'serpiente',
+    'cocodrilo', 'ballena', 'delfín', 'tiburón', 'pingüino', 'águila', 'búho', 'gallina', 'caballo', 'vaca',
+    'cerdo', 'oveja', 'cabra', 'conejo', 'ratón', 'murciélago', 'zanahoria', 'brócoli', 'espinaca', 'calabacín',
+    'tomate', 'pepino', 'pimiento', 'maíz', 'guisantes', 'calabaza', 'manzana', 'plátano', 'fresa', 'naranja',
+    'uva', 'sandía', 'piña', 'melón', 'pera', 'mango', 'mamá', 'papá', 'abuela', 'abuelo', 'casa', 'coche',
+    'sol', 'luna', 'árbol', 'flor', 'pelota', 'juguete', 'libro', 'agua', 'leche', 'pan', 'mano', 'pie'
 ];
 let opciones = []
 function generadorNumerosAleatorios() {
@@ -46,7 +45,7 @@ async function opcioness() {
         codigo.innerHTML += `
         <div class="palabra" id="op${index}">                            
             <input type="radio" name="palabra" id="palabra${index}">
-            <label for="palabra${index}">${opciones[index]}</label>
+            <label id="pal${index}" for="palabra${index}">${opciones[index]}</label>
         </div>
         `
         
@@ -69,7 +68,7 @@ async function opcioness() {
         codigo2.innerHTML += `
         <div class="imagen" id="img${index}">
             <input type="radio" name="imagen" id="imagen${index}"> 
-            <img src="${imagen}" for="imagen${index}">   
+            <img src="${imagen}" id="img${index}" for="imagen${index}">   
         </div>
         `; 
 	}
@@ -133,42 +132,48 @@ document.addEventListener('click', function(event) { // esta funcion hace que lo
                         clearInterval(intervalo);
                     }
                 }, 100);
+                // aca creo reproduzco el audio corto para cuando la imagen y la palabra coinciden
                 codigo3.innerHTML += ` 
                     <audio autoplay id="audioo">
                         <source src="audios/Ganaste.mp3" type="audio/mpeg">
                         Tu navegador no soporta el elemento de audio.
                     </audio>
-                `;// aca creo reproduzco el audio corto para cuando la imagen y la palabra coinciden
-                setTimeout( // en todo este timeout, al pasar los 900 milisegundos del audio (no son esos con exactitud) borra el fragmento de texto del audio para que no se vuelva a reproducir en el futuro, le saco el checked a los inputs clickeados y los deshabilito
+                `;
+                setTimeout( // en todo este timeout, al pasar los 900 milisegundos del audio (no son esos con exactitud en el audio) borra el fragmento de texto del audio para que no se vuelva a reproducir en el futuro, le saco el checked a los inputs clickeados y los deshabilito
                     function name(params) {
                     const codigo4 =document.getElementById('audioo')
                     codigo4.remove()
                 // quitar cheked de input:radio
-                for (var i = 1; i <= intentos; i++) {
-                let miOpcion = document.getElementById(`palabra${i}`);
-                    if (miOpcion.checked == true) {
-                        miOpcion.checked= false
-                        miOpcion.disabled = true;
+                    for (var i = 1; i <= intentos; i++) {
+                        let miOpcion = document.getElementById(`palabra${i}`);
+                        let palabra = document.getElementById(`pal${i}`)
+                        if (miOpcion.checked == true) {
+                            palabra.style.backgroundColor = "blue"; //esto se le aplica a la palabra despues de que acierta
+                            miOpcion.checked= false
+                            miOpcion.disabled = true;
+                            console.log(miOpcion)
+                        }
                     }
-                console.log(miOpcion)
-                }
-                for (var i = 1; i <= intentos; i++) {
-                let miOpcion = document.getElementById(`imagen${i}`);
-                    console.log(miOpcion)
-                    if (miOpcion.checked == true) {
-                        miOpcion.checked= false
-                        miOpcion.disabled = true; 
-                }
-            }
+                    for (var i = 1; i <= intentos; i++) {
+                        let miOpcion2 = document.getElementById(`imagen${i}`);
+                        let imagen = document.getElementById(`img${i}`)
+                        if (miOpcion2.checked == true) {
+                            imagen.style.backgroundColor = "blue"; //esto se le aplica a la imagen despuesde que acierta
+                            miOpcion2.checked = false
+                            miOpcion2.disabled = true; 
+                        console.log(miOpcion2)
+                        }
+                    }
+                
                     console.log(conta)
                     if (conta == intentos) {// este if se acciona cuando los 3 input de abajo estan deshabilitados
                         if (errados > intentos/2) {// este if se fija cuantas veces se equivoco el usuario para saber si poner el audio "Ganastee.mp3" o "Perdistee.mp3" (todavia no se bien que poner en la condicion ya que no se tampoco si vamos a seguir usando 3 palabras o mas)
                             
                             codigo3.innerHTML += `
-                            <audio autoplay id="audioo">
-                                <source src="audios/Perdistee.mp3" type="audio/mpeg">
-                                Tu navegador no soporta el elemento de audio.
-                            </audio>
+                                <audio autoplay id="audioo">
+                                    <source src="audios/Perdistee.mp3" type="audio/mpeg">
+                                    Tu navegador no soporta el elemento de audio.
+                                </audio>
                             `;
                             
                             let form = document.getElementById("miFormulario");
@@ -186,10 +191,10 @@ document.addEventListener('click', function(event) { // esta funcion hace que lo
                         } else {
                             
                         codigo3.innerHTML += `
-                        <audio autoplay id="audioo">
-                            <source src="audios/Ganastee.mp3" type="audio/mpeg">
-                            Tu navegador no soporta el elemento de audio.
-                        </audio>
+                            <audio autoplay id="audioo">
+                                <source src="audios/Ganastee.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
                         `;
                         
                         let form = document.getElementById("miFormulario");
